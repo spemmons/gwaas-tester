@@ -12,7 +12,7 @@ var listener = new Listener(config.port,config.host,function(message){
 });
 
 function sendHeartbeat(){
-    console.log('sending heartbeat...' + heartbeat.sequenceNumber + ': ' + heartbeat.toWire());
+    console.log('sending heartbeat...' + heartbeat.sequenceNumber + ': ' + heartbeat.toWire().inspect());
     listener.send(heartbeat);
     console.log('done')
 }

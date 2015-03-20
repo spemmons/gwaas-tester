@@ -12,10 +12,9 @@ var listener = new Listener(config.port,config.host,function(message){
 });
 
 function sendHeartbeat(){
+    heartbeat.timestamp = (new Date()).valueOf();
     console.log('sending heartbeat...' + heartbeat.sequenceNumber + ': ' + heartbeat.toWire().inspect());
     listener.send(heartbeat);
-    console.log('done')
 }
 
 sendHeartbeat();
-

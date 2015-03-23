@@ -7,18 +7,18 @@ var CLOSING_DELAY = 2;
 var heartbeat = new m2m.Message({messageType: m2m.Common.MOBILE_ORIGINATED_EVENT,sequenceNumber: 1}).pushString(0,config.imei);
 
 var listener = new Listener(config.port,config.host,function(message){
-    console.log(message.timestamp.toString() + ' - received ACK...     ' + message.sequenceNumber);
+    listener.log(message.timestamp.toString() + ' - received ACK...     ' + message.sequenceNumber,message.timestamp);
     if ((heartbeat.sequenceNumber += 1) < 5)
         sendHeartbeat();
     else {
-        console.log((new Date()).valueOf().toString() + ' - closing in ' + CLOSING_DELAY + '...');
+        listener.log('closing in ' + CLOSING_DELAY + '...');
         setTimeout(function() { listener.client.close(); },CLOSING_DELAY * 1000);
     }
 });
 
 function sendHeartbeat(){
     heartbeat.timestamp = (new Date()).valueOf();
-    console.log(heartbeat.timestamp.toString() + ' - sending heartbeat...' + heartbeat.sequenceNumber);
+    listener.log('sending heartbeat...' + heartbeat.sequenceNumber,heartbeat.timestamp);
     listener.send(heartbeat);
 }
 

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/spemmons/gwaas-tester",
   "dependencies": {
+    "lodash": "^3.5.0",
     "m2m-ota-javascript": "0.0.5"
   }
 }
